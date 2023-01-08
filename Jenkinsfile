@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'gradle:6.6.1-jre14-openj9'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
