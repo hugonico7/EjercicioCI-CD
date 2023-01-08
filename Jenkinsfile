@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+      docker { image 'gradle:6.6.1-jre14-openj9'}
+  }
   stages {
     stage('Checkout') {
       steps {
