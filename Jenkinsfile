@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'jenkins/inbound-agent:alpine'
+            image 'gradle:6.6.1-jre14-openj9'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
@@ -14,20 +14,14 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    def gradleImage = docker.image('gradle:6.6.1-jre14-openj9')
-                    gradleImage.inside {
-                        sh './gradlew compileJava'
-                    }
+                    sh './gradlew compileJava'
                 }
             }
         }
         stage('Unit Tests') {
             steps {
                 script {
-                    def gradleImage = docker.image('gradle:6.6.1-jre14-openj9')
-                    gradleImage.inside {
-                        sh './gradlew test'
-                    }
+                    sh './gradlew test'
                 }
             }
         }
